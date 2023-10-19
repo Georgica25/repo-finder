@@ -13,5 +13,13 @@ export function AboutPage() {
     navigate("/");
   };
 
-  return <h1 className="text-6xl">This is About page</h1>;
+  return (
+    <div>
+      <h1 className="text-6xl mb-4">This is About page</h1>
+      <p className="text-2xl font-light">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor
+        exercitationem consectetur dignissimos libero soluta repudiandae!
+      </p>
+    </div>
+  );
 }
