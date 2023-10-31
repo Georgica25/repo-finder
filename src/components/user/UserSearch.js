@@ -1,7 +1,10 @@
-import { useState } from "react";
-
-export function UserSearch({ onSearchSubmit }) {
+import { useContext, useState } from "react";
+import GithubContext from "../../context/github/GithubContext";
+import AlertContext from "../../context/alert/AlertContext";
+export function UserSearch() {
   const [text, setText] = useState("");
+  const { fetchUsers, users } = useContext(GithubContext);
+  const { alert, setAlert } = useContext(AlertContext);
 
   const onSearchChange = (evt) => {
     setText(evt.target.value);
@@ -11,11 +14,11 @@ export function UserSearch({ onSearchSubmit }) {
     evt.preventDefault();
 
     if (text === "") {
-      alert("Please add search param");
+      setAlert("You have to add a search term", "error");
       return;
     }
 
-    onSearchSubmit(text);
+    fetchUsers(text);
 
     setText("");
   };
@@ -44,9 +47,11 @@ export function UserSearch({ onSearchSubmit }) {
         </form>
       </div>
 
-      <div>
-        <button className="btn btn-ghost btn-lg">Clear</button>
-      </div>
+      {users.length > 0 && (
+        <div>
+          <button className="btn btn-ghost btn-lg">Clear</button>
+        </div>
+      )}
     </div>
   );
 }

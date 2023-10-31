@@ -1,18 +1,17 @@
-import { useState } from "react";
 import { UserList } from "../components/user/UserList";
 import { UserSearch } from "../components/user/UserSearch";
+import { Alert } from "../components/layout/Alert";
+import AlertContext from "../context/alert/AlertContext";
+import { useContext } from "react";
 export function HomePage() {
-  const [searchText, setSearchText] = useState("");
-
-  const searchUsers = (text) => {
-    setSearchText(text);
-  };
-
+  const { alert } = useContext(AlertContext);
   return (
     <div>
-      <UserSearch onSearchSubmit={searchUsers} />
+      {alert && <Alert />}
 
-      {searchText && <UserList searchTerm={searchText} />}
+      <UserSearch />
+
+      <UserList />
     </div>
   );
 }

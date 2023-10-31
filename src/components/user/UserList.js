@@ -1,30 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Spinner } from "./Spinner";
 import { UserItem } from "./UserItem";
-export function UserList({ searchTerm }) {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+import GithubContext from "../../context/github/GithubContext";
 
-  useEffect(() => {
-    if (searchTerm !== "") {
-      fetchUsers(searchTerm);
-    }
-  }, [searchTerm]);
-
-  const fetchUsers = async (text) => {
-    const response = await fetch(
-      `https://api.github.com/search/users?q=${text}`,
-      {
-        headers: {
-          Authorization: "token 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",
-        },
-      }
-    );
-    const { items } = await response.json();
-
-    setUsers(items);
-    setLoading(false);
-  };
+export function UserList() {
+  const { users, loading } = useContext(GithubContext);
 
   if (!loading) {
     return (

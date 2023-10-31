@@ -14,7 +14,10 @@ export function UserItem({ user: { login, avatar_url } }) {
 
         <div>
           <h2 className="card-title">{login}</h2>
-          <NavLink className="text-base-content text-opacity-40" to={""}>
+          <NavLink
+            className="text-base-content text-opacity-40"
+            to={`/user/${login}`}
+          >
             Visit Profile
           </NavLink>
         </div>
